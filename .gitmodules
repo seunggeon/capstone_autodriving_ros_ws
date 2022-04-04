@@ -1,0 +1,9 @@
+[submodule "omo_r1mini-foxy"]
+	path = omo_r1mini-foxy
+	url = https://github.com/omorobot/omo_r1mini-foxy.git
+[submodule "src/YDLidar-SDK"]
+	path = src/YDLidar-SDK
+	url = https://github.com/PinkWink/YDLidar-SDK.git
+[submodule "src/ydlidar_ros2_driver"]
+	path = src/ydlidar_ros2_driver
+	url = https://github.com/PinkWink/ydlidar_ros2_driver.git
