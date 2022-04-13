@@ -1,1 +1,0 @@
-/home/seunkun/pre_capstone/src/gcamp_ros2_basic/gcamp_gazebo/launch/skid_robot_world.launch.py
