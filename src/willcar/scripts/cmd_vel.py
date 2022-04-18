@@ -1,68 +1,49 @@
-import rclpy 
-from rclpy.node import Node
-from rclpy.qos import QoSProfile
+#!/usr/bin/env python
+
+import rospy
 from std_msgs.msg import String
 
-class HelloworldSubscriber(Node) :
+def subscribe_topic_message(self, msg):
+    self.get_logger().info('Recived Message: {0}'.format(msg.data))
+    car = YB_Pcb_Car()
 
-    def __init__(self) : 
-        super.__init__('helloworld_subscriber')
-        qos_profile = QoSProfile(depth=10)
-        self.helloworld_subscriber = self.create_subscription(
-            String,
-            'helloworld',
-            self.subscribe_topic_message,
-            qos_profile
-        )
+    # Car_Run 
+    car.Car_Run(150, 150)
+    time.sleep(2)
+    car.Car_Stop()
 
-    def subscribe_topic_message(self, msg):
-        self.get_logger().info('Recived Message: {0}'.format(msg.data))
-        car = YB_Pcb_Car()
+    # Car_Back
+    car.Car_Back(150, 150)
+    time.sleep(2)
+    car.Car_Stop()
 
-        # Car_Run 
-        car.Car_Run(150, 150)
-        time.sleep(2)
-        car.Car_Stop()
+    # Car_left
+    car.Car_Left(0, 150)
+    time.sleep(2)
+    car.Car_Stop()
 
-        # Car_Back
-        car.Car_Back(150, 150)
-        time.sleep(2)
-        car.Car_Stop()
+    # Car_Right
+    car.Car_Right(150, 0)
+    time.sleep(2)
+    car.Car_Stop()
 
-        # Car_left
-        car.Car_Left(0, 150)
-        time.sleep(2)
-        car.Car_Stop()
+    # Car_Spin_Left
+    car.Car_Spin_Left(150, 150)
+    time.sleep(2)
+    car.Car_Stop()
 
-        # Car_Right
-        car.Car_Right(150, 0)
-        time.sleep(2)
-        car.Car_Stop()
+    # Car_Spin_Right
+    car.Car_Spin_Right(150, 150)
+    time.sleep(2)
+    car.Car_Stop()
 
-        # Car_Spin_Left
-        car.Car_Spin_Left(150, 150)
-        time.sleep(2)
-        car.Car_Stop()
+def listener():
+    rospy.init_node('listener', anonymous=True)
+    rospy.Subscriber('hello_world_msg', String, subscribe_topic_message)
+    rospy.spin()
 
-        # Car_Spin_Right
-        car.Car_Spin_Right(150, 150)
-        time.sleep(2)
-        car.Car_Stop()
-    
-
-def main(args=None):
-    rclpy.init(args=args)
-    node = HelloworldSubscriber()
-
-
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt :
-        node.get_logger().info('Keyboard Interrupt (SIGINT)')
-    finally :
-        node.destroy_node()
-        rclpy.shutdown()
-
+if __name__ == '__main__':
+    listener()
 
 ######################################
 #######   RAZBOT   Contrl       ######
